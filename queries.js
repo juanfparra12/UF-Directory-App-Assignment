@@ -76,7 +76,7 @@ var retrieveAllListings = function()
     Retrieve all listings in the database, and log them to the console. 
    */
 
-   Listings.find({}, function(err, listing){
+   Listing.find({}, function(err, listing){
      if(err) 
       throw err;
      console.log(listing);
