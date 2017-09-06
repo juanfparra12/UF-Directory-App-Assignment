@@ -7,8 +7,10 @@
 var fs = require('fs'),
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
+    listing = require('./listings.json'),
     Listing = require('./ListingSchema.js'),
     config = require('./config');
+
 
 /* Connect to your database */
 mongoose.connect(config.db.uri,
@@ -20,39 +22,16 @@ mongoose.connect(config.db.uri,
   Instantiate a mongoose model for each listing object in the JSON file,
   and then save it to your Mongo database
  */
- fs.readFile('listings.json', 'utf8', function (err, data)
- {
-     if (err)
-     {
-         throw err;
-     }
-     
-  var listingData =mongoose.model('Listing', Listing.listingSchema);
-  module.exports = listingData;
+      console.log(listing.entries.length);
 
-	console.log(data);
-
-    JSON.parse(data).entries.forEach(function(listing)
-    {
-		  var listing = new ufListing(
+      //This for loop creates each individual listings on the JSON file.
+      for(var i = 0; i < listing.entries.length; i++)
       {
-			  code: listing.code, 
-			  name: listing.name, 
-			  coordinates :
+        var newListing = new Listing(listing.entries[i]);
+        newListing.save(function(err)
         {
-				  latitude : listing.latitude,
-			 	  longitude : listing.longitude
-			  },
-			  address : listing.address
-		   });
-
-		    listing.save(function(err)
-        {
-			       if(err) throw err;
-
-		    });
-	   });
-  });
+        });
+      }
 
 /*
   Once you've written + run the script, check out your MongoLab database to ensure that
