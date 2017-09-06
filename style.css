@@ -1,8 +1,17 @@
-#searchBar {
+#searchBar
+{
   margin: 15px 10px;
 }
 
-.tableWrapper {
+.tableWrapper
+{
   max-height: 400px;
   overflow: auto;
+}
+
+body
+{
+  background-image: url("Florida Gators desktop wallpaper.jpg");
+  background-position: center;
+  background-attachment: fixed;
 }
