@@ -3,12 +3,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
-var listingSchema = new Schema({
+var listingSchema = new Schema(
+{
   /* your code here */
   code:
   {
     type: String,
-    required: true,  
+    required: true,
   },
   name:
   {
@@ -24,16 +25,18 @@ var listingSchema = new Schema({
 });
 
 /* create a 'pre' function that adds the updated_at (and created_at if not already there) property */
-listingSchema.pre('save', function(next) {
+listingSchema.pre('save', function(next)
+{
   /* your code here */
   //Creates a data var to then change the updates_date to the var date
    var date = new Date();
    this.updated_at = date;
 
 //If there is no created_at then add this to var date
-   if(!this.created_at){
+   if(!this.created_at)
+   {
     this.created_at = date;
-  }
+   }
 
   next();
 });
