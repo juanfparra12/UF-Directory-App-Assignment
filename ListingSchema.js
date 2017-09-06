@@ -39,7 +39,7 @@ listingSchema.pre('save', function(next)
    }
 
   next();
-});
+ });
 
 /* Use your schema to instantiate a Mongoose model */
 var Listing = mongoose.model('Listing', listingSchema);
